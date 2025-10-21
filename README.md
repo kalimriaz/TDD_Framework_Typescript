@@ -21,6 +21,12 @@ npx playwright install
 npm test
 ```
 
+Run tests
+
+```bash
+npm test
+```
+
 Optional (helpful for learning)
 - Run tests headed: `npm run test:headed`
 - Lint: `npm run lint` (ESLint + Prettier config included)

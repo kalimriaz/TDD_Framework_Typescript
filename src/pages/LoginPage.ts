@@ -14,17 +14,19 @@ export default class LoginPage {
   }
 
   async goto() {
-    await this.page.goto('/web/index.php/auth/login');
+    // Navigate and wait for the DOM to be interactive
+    await this.page.goto('/web/index.php/auth/login', { waitUntil: 'domcontentloaded' });
+    // Wait for the username input to be visible before proceeding
+    await this.usernameInput.waitFor({ state: 'visible', timeout: 10000 });
   }
 
   async login(username: string, password: string) {
+    // Ensure inputs are present before interacting
+    await this.usernameInput.waitFor({ state: 'visible', timeout: 10000 });
     await this.usernameInput.fill(username);
+    await this.passwordInput.waitFor({ state: 'visible', timeout: 5000 });
     await this.passwordInput.fill(password);
-    // Click and wait for dashboard navigation - more reliable for tests
-    await Promise.all([
-      this.page.waitForURL(/.*dashboard.*/i, { timeout: 5000 }).catch(() => {}),
-      this.loginButton.click()
-    ]);
+    await this.loginButton.click();
   }
 
   async isLoggedIn(): Promise<boolean> {
