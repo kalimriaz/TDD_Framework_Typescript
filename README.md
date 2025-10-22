@@ -7,6 +7,11 @@ Demo credentials
 - username: Admin
 - password: admin123
 
+Credentials from CSV
+- This project now reads credentials from `data/credentials.csv`.
+- The file has a header: `username,password,label` and supports multiple rows (e.g. label `valid` and `invalid`).
+- Edit `data/credentials.csv` to add your own test accounts.
+
 Quick start (minimum steps)
 1) Install dependencies and Playwright browsers
 
